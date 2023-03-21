@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,500;1,400&display=swap");
+body {
+  background-color: #f6f6f6;
+  margin: 0;
+  padding: 0;
+  font-family: "Robot Mono", monospace;
+}
+
+.main {
+  width: 70%;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.auth {
+  background: white;
+  width: 100%;
+  margin: auto;
+  border-radius: 10px;
+}
+
+h2 {
+  text-align: center;
+  padding-top: 30px;
+}
+
+.auth form {
+  padding: 20px;
+}
+
+.auth form input {
+  padding: 5px 7px;
+  margin-bottom: 20px;
+  width: calc(100% - 16px);
+}
+.auth .submit {
+  background: #a0c099;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 30px;
+  display: block;
+  width: auto;
+  margin: auto;
+}
+
+.login-toggle {
+  margin-top: 30px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.auth .login-toggle button {
+  border: none;
+  width: 50%;
+  padding: 10px;
+}
+
+.auth .login-toggle .login {
+  border-radius: 0 0 10px 0;
+}
+
+.auth .login-toggle .register {
+  border-radius: 0 0 0 10px;
+}
+
+.auth .error {
+  font-size: 12px;
+  text-align: center;
+}
+
+
+.lists {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 40px;
+  width: calc(100% - 40px);
+}
+
+/* List Items */
+.list-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.button-container button {
+  margin-left: 10px;
+  padding: 5px 7px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.create-new {
+  width: 100%;
+}
+
+.create-new form {
+  text-align: center;
+}
+
+.create-new form input, button {
+  padding: 5px 7px;
+  margin-bottom: 20px;
+}
+
+.create-new input {
+  width: 70%;
+  margin-right: 10px;
+}
