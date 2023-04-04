@@ -7,13 +7,14 @@ function FriendPage() {
     const [cookie, setCookie, removeCookie] = useCookies();
     const params = useParams();
     const friend = params.friend;
-    const username = cookie.username;
     const authToken = cookie.authToken;
     const [lists, setLists] = useState(null);
 
     async function getData () {
         try {
-        const response = await fetch(`http://localhost:5050/friends/${username}/${friend}`);
+        const response = await fetch(`http://localhost:5050/friends/${friend}`, {
+            credentials: 'include'
+        });
         const json = await response.json();
 
         setLists(json);

@@ -2,21 +2,20 @@ import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 
 function CreateList( { getData }) {
-    const [cookie, setCookie, removeCookie] = useCookies(null);
     const [title, setTitle] = useState('');
 
     function handleSubmit (e) {
       e.preventDefault()
 
       const list = {
-        username: cookie.username,
         title: title
       }
 
       fetch('http://localhost:5050/list/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify(list)
+        body: JSON.stringify(list),
+        credentials: 'include'
       }).then((response) => {
         if(response.ok) {
           getData();

@@ -2,19 +2,17 @@ import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 
 function SearchUser( { getData }) {
-    const [cookie, setCookie, removeCookie] = useCookies(null);
     const [user, setUser] = useState('');
     const [error, setError] = useState(null);
-
-    const username = cookie.username;
 
     function addFriend (e) {
         e.preventDefault();
 
-        fetch(`http://localhost:5050/friends/add/${username}`, {
+        fetch(`http://localhost:5050/friends/add/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify({friend: user})
+            body: JSON.stringify({friend: user}),
+            credentials: 'include'
         }).then((response) => {
             if (response.status === 409) {
                 setError('You are already friends with this user')

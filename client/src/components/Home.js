@@ -7,19 +7,20 @@ import { useCookies } from 'react-cookie';
 
 function Home({ list, getData }) {
     const [cookie, setCookie, removeCookie] = useCookies(null);
-    const username = cookie.username;
     const authToken = cookie.authToken;
 
     const [lists, setLists] = useState(null);
 
     async function getData () {
         try {
-        const response = await fetch(`http://localhost:5050/list/${username}`);
-        const json = await response.json();
+            const response = await fetch(`http://localhost:5050/list/`, {
+                credentials: 'include'
+            });
+            const json = await response.json();
 
-        setLists(json);
+            setLists(json);
         } catch (error){
-        console.log(error);
+            console.log(error);
         }
     }
 
