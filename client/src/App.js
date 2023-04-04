@@ -1,41 +1,27 @@
-import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Auth from './components/Auth';
-import CreateList from './components/CreateList';
-import TodoList from './components/TodoList';
+import { useCookies } from 'react-cookie';
+
+import Home from './components/Home';
+import Navbar from './components/Navbar';
+import TodoPage from './components/TodoPage';
+import Friends from './components/Friends';
+import FriendPage from './components/FriendPage';
 
 function App() {
-  const authToken = true;
-
-  const [lists, setLists] = useState(null);
-
-  async function getData () {
-    try {
-      const response = await fetch('http://localhost:5050/list');
-      const json = await response.json();
-
-      setLists(json);
-    } catch (error){
-      console.log(error);
-    }
-  }
-
-  useEffect(() => getData, [])
+  const [cookie, setCookie, removeCookie] = useCookies();
+  const authToken = cookie.authToken;
 
   return (
     <>
+      {authToken && <Navbar />}
+      
       <div className='main'>
-        {!authToken && <Auth />}
-        {authToken && 
-          <>
-            <CreateList getData={getData}/>
-            <div className="lists">
-              {lists?.map((list) => <TodoList key={list.id} getData={getData} list={list}/>)}
-            </div>
-          </>
-        }
-
-
+        <Routes>
+          <Route path='/' element={<Home />}/>
+          <Route path='/todos/:id' element={<TodoPage />} />
+          <Route path='/friends' element={<Friends />} />
+          <Route path='/friends/:friend' element={<FriendPage />}/>
+        </Routes>
       </div>
     </>
   );

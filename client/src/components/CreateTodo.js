@@ -1,22 +1,20 @@
 import { useState } from 'react';
-import { useCookies } from 'react-cookie';
 
-function CreateList( { getData }) {
-    const [cookie, setCookie, removeCookie] = useCookies(null);
+function CreateTodo( { getData, listID }) {
     const [title, setTitle] = useState('');
 
     function handleSubmit (e) {
       e.preventDefault()
 
-      const list = {
-        username: cookie.username,
+      const todo = {
+        id: listID,
         title: title
       }
 
-      fetch('http://localhost:5050/list/add', {
+      fetch('http://localhost:5050/todos/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify(list)
+        body: JSON.stringify(todo)
       }).then((response) => {
         if(response.ok) {
           getData();
@@ -28,21 +26,21 @@ function CreateList( { getData }) {
 
     return (
       <div className='create-new'>
-        <h2>Create new list</h2>
+        <h2>Add new task</h2>
         <form>
             <input
               type="text"
-              placeholder="New list..."
+              placeholder="New todo..."
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
             <button
               type="submit"
               onClick={(e) => handleSubmit(e)}
-            >Create</button>
+            >Add</button>
         </form>
       </div>
     );
   };
   
-  export default CreateList;
+  export default CreateTodo;

@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useCookies } from 'react-cookie';
 
 function Auth() {
-    const [error, setError] = useState('Hello');
+    const [cookie, setCookie, removeCookie] = useCookies(null);
+    const [error, setError] = useState(null);
     const [login, setLogin] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -12,11 +14,10 @@ function Auth() {
         setLogin(state);
     };
 
-    function handleSubmit (e, state) {
+    async function handleSubmit (e, state) {
         e.preventDefault();
         const user = {username, password};
         const regUser = {username, password, confirmedPassword};
-        
 
         if(state === true) {
              fetch('http://localhost:5050/auth/login', {
@@ -24,9 +25,14 @@ function Auth() {
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify(user),
                 credentials: 'include'
-            }).then((response) => {
+            }).then(async (response) => {
                 if(!response.ok) {
                    setError('Invalid username or password') 
+                } else {
+                    const data = await response.json();
+
+                    setCookie('username', data.username, { path: '/' });
+                    setCookie('authToken', data.authToken, { path: '/' });
                 }
             })
         } else {
@@ -38,6 +44,9 @@ function Auth() {
                 }).then((response) => {
                     if(!response.ok) {
                         setError('User already exists')
+                    } else {
+                        setError(null);
+                        setLogin(true);
                     }
                 })
             } else {

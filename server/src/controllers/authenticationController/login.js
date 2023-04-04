@@ -29,14 +29,9 @@ exports.login = function login (req, res) {
                 const validPassword = await bcrypt.compare(password, hashedPassword);
                 
                 if(validPassword) {
-                    const authToken = jwt.sign({username: username}, secret, {expiresIn: 120});
+                    const authToken = jwt.sign({ username }, secret, {expiresIn: '1hr'});
 
-                    res.cookie('authToken', authToken, {
-                        maxAge: 360000,
-                        httpOnly: true
-                    });
-
-                    res.status(200).send('Login successful!');
+                    res.status(200).json({ username, authToken });
                 } else {
                     res.status(400).send('Incorrect username or password');
                 }
