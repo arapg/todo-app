@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 
 function Friend({ friend, getData }) {
-  const [cookie, setCookie, removeCookie] = useCookies();
  
     function deleteData() {
       

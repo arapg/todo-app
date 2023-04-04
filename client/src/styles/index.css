@@ -25,6 +25,8 @@ button {
   border: 1px solid darkgrey;
 }
 
+
+
 /* Navigation */
 nav {
   padding:  10px 20px;
@@ -104,6 +106,8 @@ nav button:hover {
   font-size: 12px;
   text-align: center;
 }
+
+
 
 /* Lists */
 .lists {

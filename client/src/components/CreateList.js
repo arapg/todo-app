@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useCookies } from 'react-cookie';
 
 function CreateList( { getData }) {
     const [title, setTitle] = useState('');

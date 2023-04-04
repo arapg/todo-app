@@ -6,7 +6,6 @@ import TodoItem from './TodoItem';
 
 function TodoPage( { list }) {
     const [cookie, setCookie, removeCookie] = useCookies(null);
-    const username = cookie.username;
     const authToken = cookie.authToken;
 
     const params = useParams();
