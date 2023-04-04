@@ -31,7 +31,7 @@ exports.login = function login (req, res) {
                 if(validPassword) {
                     const authToken = jwt.sign({ username }, secret, {expiresIn: '1hr'});
 
-                    res.status(200).json({ username, authToken });
+                    res.status(200).json({ authToken });
                 } else {
                     res.status(400).send('Incorrect username or password');
                 }
