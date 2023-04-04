@@ -5,10 +5,10 @@ const { getFriendLists } = require('../controllers/friendController/getFriendLis
 const { getFriends } = require('../controllers/friendController/getFriends');
 const friendRoute = express.Router();
 
-friendRoute.get('/:username', getFriends);
-friendRoute.post('/add/:username', addFriend);
-friendRoute.delete('/delete/:username', deleteFriend);
-friendRoute.get('/:username/:friend', getFriendLists);
+friendRoute.get('/', getFriends);
+friendRoute.post('/add/', addFriend);
+friendRoute.delete('/delete/', deleteFriend);
+friendRoute.get('/:friend', getFriendLists);
 
 
 exports.friendRoute = friendRoute;
