@@ -14,7 +14,8 @@ function CreateTodo( { getData, listID }) {
       fetch('http://localhost:5050/todos/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify(todo)
+        body: JSON.stringify(todo),
+        credentials: 'include'
       }).then((response) => {
         if(response.ok) {
           getData();

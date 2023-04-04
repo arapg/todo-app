@@ -15,7 +15,8 @@ function TodoItem ( { todo, getData } ) {
         fetch(`http://localhost:5050/todos/edit`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(todoItem)
+            body: JSON.stringify(todoItem),
+            credentials: 'include'
         }).then((response) => {
             if(response.ok) {
                 getData();
@@ -26,7 +27,8 @@ function TodoItem ( { todo, getData } ) {
     function deleteData() {
 
         fetch(`http://localhost:5050/todos/delete/${todo.id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        credentials: 'include'
       }).then((response => {
         if(response.ok) {
           getData();
@@ -38,6 +40,7 @@ function TodoItem ( { todo, getData } ) {
         if(!todo.completed) {
             fetch(`http://localhost:5050/todos/complete/${todo.id}`, {
                 method: 'PATCH',
+                credentials: 'include'
             }).then((response) => {
                 if(response.ok) {
                     getData();
@@ -45,7 +48,8 @@ function TodoItem ( { todo, getData } ) {
             })
         } else {
             fetch(`http://localhost:5050/todos/uncomplete/${todo.id}`, {
-                method: 'PATCH'
+                method: 'PATCH',
+                credentials: 'include'
             }).then((response) => {
                 if(response.ok) {
                     getData();

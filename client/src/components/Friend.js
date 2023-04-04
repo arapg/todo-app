@@ -3,17 +3,14 @@ import { useCookies } from 'react-cookie';
 
 function Friend({ friend, getData }) {
   const [cookie, setCookie, removeCookie] = useCookies();
-    const username = cookie.username;
-
-    const foundFriend = friend.user1 !== username ? friend.user1 : friend.user2;
-
-
+ 
     function deleteData() {
       
-      fetch(`http://localhost:5050/friends/delete/${username}`, {
+      fetch(`http://localhost:5050/friends/delete/`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({friend: foundFriend})
+        body: JSON.stringify({ friend }),
+        credentials: 'include'
       }).then((response => {
         if(response.ok) {
           getData();
@@ -23,8 +20,8 @@ function Friend({ friend, getData }) {
 
     return (
       <div className="list-item">
-        <Link to={`/friends/${foundFriend}`}>
-          <p>{foundFriend}</p>
+        <Link to={`/friends/${friend.friend}`}>
+          <p>{friend.friend}</p>
         </Link>
         
         <div className="button-container">
