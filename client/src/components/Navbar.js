@@ -7,7 +7,6 @@ function Navbar() {
 
     function logOut() {
         removeCookie('authToken', { path: '/' });
-        removeCookie('username', { path: '/' });
         
         navigate('/');
     }
