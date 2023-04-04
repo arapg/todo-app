@@ -15,7 +15,6 @@ exports.getFriends = function getFriends (req, res) {
     const decoded = jwt.decode(authToken, secret);
 
     const { username } = decoded;
-    console.log(username);
     
     // endpoint validation
     const { errorUsername } = usernameSchema.validate(username);

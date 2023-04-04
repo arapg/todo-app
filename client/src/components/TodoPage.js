@@ -15,14 +15,14 @@ function TodoPage( { list }) {
 
     async function getData () {
         try {
-        const response = await fetch(`http://localhost:5050/todos/${params.id}`, {
-          credentials: 'include'
-        });
-        const json = await response.json();
+          const response = await fetch(`http://localhost:5050/todos/${params.id}`, {
+            credentials: 'include'
+          });
+          const json = await response.json();
 
-        setTodos(json);
+          setTodos(json);
         } catch (error){
-        console.log(error);
+          console.log(error);
         }
     }
 
