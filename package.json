@@ -16,6 +16,6 @@
   },
   "homepage": "https://github.com/arapg/todo-app#readme",
   "dependencies": {
-    "if-env": "^1.0.4"
+    
   }
 }
