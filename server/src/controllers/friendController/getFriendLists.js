@@ -1,14 +1,24 @@
+const jwt = require('jsonwebtoken');
 const mysql = require('mysql2');
+require('dotenv').config();
 const { config } = require('../../database/config');
 const { usernameSchema } = require('../../schemas/usernameSchema');
 const { friendSchema } = require('../../schemas/friendSchema');
+
+const secret = process.env.SECRET;
 
 // establish connection to database
 const connection = mysql.createConnection(config);
 
 // get friend's lists
 exports.getFriendLists = function getFriendLists (req, res) {
-    const { errorUsername } = usernameSchema.validate(req.params);
+    const authToken = req.cookies.authToken;
+    const decoded = jwt.decode(authToken, secret);
+
+    const { username } = decoded;
+
+    // endpoint validation
+    const { errorUsername } = usernameSchema.validate(username);
     const { errorFriend } = friendSchema.validate(req.params);
 
     if(errorUsername || errorFriend) {
@@ -17,7 +27,7 @@ exports.getFriendLists = function getFriendLists (req, res) {
         if(errorFriend) return res.status(400).send(errorFriend);
     }
 
-    const { username, friend } = req.params;
+    const { friend } = req.params;
 
     // check if users are friends
     connection.query(`SELECT * FROM friends WHERE (user1 = ? AND user2 = ?) OR (user1 = ? AND user2 = ?)`, [username, friend, friend, username], (error, result) => {
