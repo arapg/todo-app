@@ -14,25 +14,26 @@ function Friends() {
             credentials: 'include'
         });
         const json = await response.json();
+        const { result, username } = json;
 
         const users = [];
 
-        json.forEach(obj => {
-            if (obj.user1 !== 'arpg') {
-                const friend = {
+        result.forEach(obj => {
+            if (obj.user1 !== username) {
+                const user = {
                     id: obj.id,
-                    friend: obj.user1
+                    user: obj.user1
                 };
 
-                users.push(friend);
+                users.push(user);
             }
-            if (obj.user2 !== 'arpg') {
-                const friend = {
+            if (obj.user2 !== username) {
+                const user = {
                     id: obj.id,
-                    friend: obj.user2
+                    user: obj.user2
                 };
 
-                users.push(friend);
+                users.push(user);
             }
         });
 

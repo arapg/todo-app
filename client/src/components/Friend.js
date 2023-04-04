@@ -18,8 +18,8 @@ function Friend({ friend, getData }) {
 
     return (
       <div className="list-item">
-        <Link to={`/friends/${friend.friend}`}>
-          <p>{friend.friend}</p>
+        <Link to={`/friends/${friend.user}`}>
+          <p>{friend.user}</p>
         </Link>
         
         <div className="button-container">

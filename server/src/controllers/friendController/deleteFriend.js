@@ -30,7 +30,7 @@ exports.deleteFriend = function deleteFriend (req, res) {
     const { friend } = req.body;
     
     
-    connection.query(`DELETE FROM friends WHERE (user1 = ? AND user2 = ?) OR (user1 = ? AND user2 = ?)`, [username, friend, friend, username], (error, result) => {
+    connection.query(`DELETE FROM friends WHERE (user1 = ? AND user2 = ?) OR (user1 = ? AND user2 = ?)`, [username, friend.user, friend.user, username], (error, result) => {
         if(error) {
             console.log(error);
         } else {

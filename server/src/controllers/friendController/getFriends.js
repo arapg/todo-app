@@ -24,7 +24,8 @@ exports.getFriends = function getFriends (req, res) {
         if(error) {
             console.log(error);
         } else {
-            res.status(200).json(result);
+            console.table(result);
+            res.status(200).json({ result: result, username: username });
         }
     });
 };

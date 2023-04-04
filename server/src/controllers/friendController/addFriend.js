@@ -17,6 +17,8 @@ exports.addFriend = function addFriend (req, res) {
 
     const { username } = decoded;
 
+    console.log(username);
+
     const { errorUsername } = usernameSchema.validate(username);
     const { errorFriend } = friendSchema.validate(req.body);
 
