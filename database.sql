@@ -1,0 +1,31 @@
+CREATE DATABASE todoapp;
+
+CREATE TABLE users (
+	username VARCHAR(255) PRIMARY KEY,
+    hashed_password VARCHAR(255)
+);
+
+CREATE TABLE todoLists (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(255),
+    title VARCHAR(50) UNIQUE,
+    date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (username) REFERENCES users(username)
+);
+
+CREATE TABLE todos (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    listID INT,
+    title VARCHAR(50),
+    completed BOOLEAN,
+    date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (listID) REFERENCES todoLists(id)
+);
+
+CREATE TABLE friends (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    user1 VARCHAR(255),
+    user2 VARCHAR(255),
+    FOREIGN KEY (user1) REFERENCES users(username),
+    FOREIGN KEY (user2) REFERENCES users(username)
+);
