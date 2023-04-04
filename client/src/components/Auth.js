@@ -31,7 +31,6 @@ function Auth() {
                 } else {
                     const data = await response.json();
 
-                    setCookie('username', data.username, { path: '/' });
                     setCookie('authToken', data.authToken, { path: '/' });
                 }
             })
