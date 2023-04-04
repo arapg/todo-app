@@ -5,20 +5,45 @@ import SearchUser from "./SearchUser";
 
 function Friends() {
     const [cookie, setCookie, removeCookie] = useCookies(null);
-    const username = cookie.username;
     const authToken = cookie.authToken;
     const [friends, setFriends] = useState(null);
 
     async function getData () {
         try {
-        const response = await fetch(`http://localhost:5050/friends/${username}`);
+        const response = await fetch(`http://localhost:5050/friends/`, {
+            credentials: 'include'
+        });
         const json = await response.json();
 
-        setFriends(json);
+        const users = [];
+
+        json.forEach(obj => {
+            if (obj.user1 !== 'arpg') {
+                const friend = {
+                    id: obj.id,
+                    friend: obj.user1
+                };
+
+                users.push(friend);
+            }
+            if (obj.user2 !== 'arpg') {
+                const friend = {
+                    id: obj.id,
+                    friend: obj.user2
+                };
+
+                users.push(friend);
+            }
+        });
+
+        setFriends(users);
+        console.log(users);
+        
         } catch (error){
         console.log(error);
         }
     }
+
 
     useEffect(() => {
         if(authToken) {
