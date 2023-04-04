@@ -8,6 +8,7 @@ const { config } = require('./database/config');
 const { listRoute } = require('./routes/listRoute');
 const { todoRoute } = require('./routes/todoRoute');
 const { friendRoute } = require('./routes/friendRoute');
+const { checkCookie } = require('./middlewares/checkCookie');
 
 const server = express();
 const connection = mysql.createConnection(config)
@@ -22,9 +23,9 @@ server.use(cors({
 connection.connect();
 
 server.use('/auth', authenticationRoute);
-server.use('/list', listRoute);
-server.use('/todos', todoRoute);
-server.use('/friends', friendRoute);
+server.use('/list', checkCookie, listRoute);
+server.use('/todos', checkCookie, todoRoute);
+server.use('/friends', checkCookie, friendRoute);
 
 server.listen(5050)
 console.log('Server is running on http://localhost:5050/');
