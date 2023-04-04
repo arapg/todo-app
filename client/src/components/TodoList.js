@@ -16,7 +16,8 @@ function TodoList({ list, getData }) {
       fetch(`http://localhost:5050/list/edit/`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify(listItem)
+        body: JSON.stringify(listItem),
+        credentials: 'include'
       }).then((response) => {
         if(response.ok) {
           getData();
@@ -27,7 +28,8 @@ function TodoList({ list, getData }) {
     function deleteData() {
       
       fetch(`http://localhost:5050/list/delete/${list.id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        credentials: 'include'
       }).then((response => {
         if(response.ok) {
           getData();
